@@ -1,0 +1,20 @@
+@import 'reset';
+
+// Variable Declarations
+
+// colors
+$main-color: #B8D9C6;
+$text-color-green: #82998C;
+$text-color-emphasis: #F28B66;
+$form-background-color: #C4C4C4;
+
+// text styles
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Pacifico&family=Playfair+Display&display=swap');
+// font-family: 'Open Sans', sans-serif;
+// font-family: 'Pacifico', cursive;
+// font-family: 'Playfair Display', serif;
+
+body {
+  padding: 10px;
+  font-family: 'Playfair Display', serif;
+}

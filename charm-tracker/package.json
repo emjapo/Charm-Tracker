@@ -10,12 +10,16 @@
   "dependencies": {
     "@babel/runtime": "^7.15.4",
     "meteor-node-stubs": "^1.1.0",
+//Line was added in git conflict. If random errors thrown before code added, try looking at this line
+    "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "meteor": {
     "mainModule": {
-      "client": "client/main.jsx",
+      "client": "client/main.js",
+//The below line was the line used before the above line was added. Check here if getting random bugs
+      //"client": "client/main.jsx",
       "server": "server/main.js"
     },
     "testModule": "tests/main.js"
