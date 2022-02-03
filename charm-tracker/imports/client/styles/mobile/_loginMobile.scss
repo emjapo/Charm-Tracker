@@ -1,0 +1,12 @@
+@media (not(hover)) {
+    div.login {
+        margin: 0 5%;
+        font-size: 90%;
+        .login-header, form.login, .login-link {
+            grid-column: 2/12;
+            label, .login-link, input {
+                grid-column: 1/7;
+            }
+        }
+    }
+}

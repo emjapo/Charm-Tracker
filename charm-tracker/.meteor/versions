@@ -24,7 +24,6 @@ ecmascript-runtime-server@0.11.0
 ejson@1.1.1
 es5-shim@4.8.0
 fetch@0.1.1
-//DOUBLE CHECK: line below was in git conflict. if random errors soon, maybe check this line and similar line in charm-tracker/.meteor/packages
 fourseven:scss@4.15.0
 geojson-utils@1.0.10
 hot-code-push@1.0.4

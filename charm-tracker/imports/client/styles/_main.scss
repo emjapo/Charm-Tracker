@@ -10,11 +10,19 @@ $form-background-color: #C4C4C4;
 
 // text styles
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Pacifico&family=Playfair+Display&display=swap');
-// font-family: 'Open Sans', sans-serif;
-// font-family: 'Pacifico', cursive;
-// font-family: 'Playfair Display', serif;
+$body-copy: 'Open Sans', sans-serif;
+$display-font: 'Pacifico', cursive;
+$headline-font: 'Playfair Display', serif;
 
 body {
-  padding: 10px;
-  font-family: 'Playfair Display', serif;
+  font-family: $body-copy;
+  font-size: 1em;
 }
+
+h1 {
+  font-family: $display-font;
+  font-size: 2em;
+}
+
+@import 'components/login';
+@import 'mobile/loginMobile';
