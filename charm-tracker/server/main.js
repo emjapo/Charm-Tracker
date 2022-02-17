@@ -1,31 +1,34 @@
 import { Meteor } from 'meteor/meteor';
-import { LinksCollection } from '/imports/api/links';
 
-function insertLink({ title, url }) {
-  LinksCollection.insert({title, url, createdAt: new Date()});
+import { eventsCollection } from '/imports/api/events';
+import { clientCollection } from '/imports/api/clients';
+import { vendorCollection } from '/imports/api/vendors';
+
+function insertEvent({ date, startTime, endTime, price }) {
+  eventsCollection.insert({date, startTime, endTime, price, createdAt: new Date()});
+}
+
+function insertClient({ firstName, lastName, email, phoneNum, street, city, state, zip }) {
+  clientCollection.insert({firstName, lastName, email, phoneNum, street, city, state, zip, createdAt: new Date()});
+}
+
+function insertVendors({ vendorType, vendorName }) {
+  vendorCollection.insert({ vendorType, vendorName, createdAt: new Date()});
 }
 
 Meteor.startup(() => {
-  // If the Links collection is empty, add some data.
-  if (LinksCollection.find().count() === 0) {
-    insertLink({
-      title: 'Do the Tutorial',
-      url: 'https://www.meteor.com/tutorials/react/creating-an-app'
+    //Synchronize 'events' collection with every subscriber
+    Meteor.publish("events/all", function() {
+      return eventsCollection.find();
     });
 
-    insertLink({
-      title: 'Follow the Guide',
-      url: 'http://guide.meteor.com'
+    //Synchronize 'clients' collection with every subscriber
+    Meteor.publish("clients/all", function() {
+      return clientCollection.find();
     });
 
-    insertLink({
-      title: 'Read the Docs',
-      url: 'https://docs.meteor.com'
+    //Synchronize 'vendors' collection with every subscriber
+    Meteor.publish("vendors/all", function() {
+      return vendorCollection.find();
     });
-
-    insertLink({
-      title: 'Discussions',
-      url: 'https://forums.meteor.com'
-    });
-  }
 });
