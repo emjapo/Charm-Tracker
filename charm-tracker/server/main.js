@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 
-import { eventsCollection } from '/imports/api/events';
-import { clientCollection } from '/imports/api/clients';
-import { vendorCollection } from '/imports/api/vendors';
+import { eventsCollection } from './../imports/api/events';
+import { clientCollection } from './../imports/api/clients';
+import {vendorCollection} from './../imports/api/vendor';
 
 function insertEvent({ date, startTime, endTime, price }) {
   eventsCollection.insert({date, startTime, endTime, price, createdAt: new Date()});
