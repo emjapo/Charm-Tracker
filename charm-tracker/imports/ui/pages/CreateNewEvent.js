@@ -3,6 +3,13 @@ import ContactDetailsForm from "../ContactDetailsForm";
 import EventDetailsForm from "../EventDetailsForm";
 import Header from "../Header";
 
+/* 
+This component uses the ContactDetailsForm and the EventDetailsForm and wraps them in this component 
+that adds some extra functionality such as beign able to select a returning customer and submitting.
+
+Both form components are wrapped in a form component. This is an area that will need to be inspected as it may disrupt the way react handles the forms.
+*/
+
 const CreateNewEvent = () => {
   const [previousCustomer, setPreviousCustomer] = useState();
   // this will need some refactoring to pull the previous customers from the database and add them to selections

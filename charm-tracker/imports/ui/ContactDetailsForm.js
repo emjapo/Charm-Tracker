@@ -1,5 +1,15 @@
 import React from "react";
 
+/*
+Collects the contact details that are used for creating an event. 
+It is passed in an optional prop of previousCustomer whenever a name 
+is selected from the dropdown menu.
+
+For further work: 
+  the previous customer prop needs to be used to get the customer details from the database.
+  That information will then be used to populate the default values of the rest of the form.
+*/
+
 const ContactDetailsForm = (props) => {
   return (
     <div>

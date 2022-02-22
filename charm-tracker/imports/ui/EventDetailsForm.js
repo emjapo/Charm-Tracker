@@ -1,5 +1,8 @@
 import React from "react";
 
+/* 
+Component that holds the form to collect event details. This same comonent can be used for editing the event details.
+*/
 const EventDetailsForm = () => {
   return (
     <div>
