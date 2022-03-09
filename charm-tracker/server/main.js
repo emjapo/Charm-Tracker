@@ -10,7 +10,7 @@ function insertEvent({ date, startTime, endTime, price }) {
 }
 
 function insertClient({ firstName, lastName, email, phoneNum, street, city, state, zip }) {
-  clientCollection.insert({firstName, lastName, email, phoneNum, street, city, state, zip, createdAt: new Date()});
+  clientCollection.insert({firstName, lastName, email, phoneNumber, street, city, state, zip, createdAt: new Date()});
 }
 
 //vendorType: ID of the vendorType for th evendor in the venderType collection

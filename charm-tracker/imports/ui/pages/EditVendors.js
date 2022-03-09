@@ -14,17 +14,17 @@ const EditVendors = () => {
     <div>
       <Header title="Edit Vendors" />
 
+      {/* Form for adding vendor types */}
+      <AddVendorType />
+      {/* Form for removing vendor types */}
+      <RemoveVendorType />
+
       {/* render the vendortype form for each vendor type */}
       {vendors.map((vendor) => {
         return(
           <VendorTypeList key={vendor._id} vendorTypeID={vendor._id} vendorTypeName={vendor.name} /> 
         )
       })}
-
-      {/* Form for adding vendor types */}
-      <AddVendorType />
-      {/* Form for removing vendor types */}
-      <RemoveVendorType />
     </div>
   )
 }

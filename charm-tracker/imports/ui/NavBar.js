@@ -27,9 +27,6 @@ const NavBar = () => {
           <Link to="/reports" onClick={() => OpenNav()}>Reports</Link>
         </li>
         <li>
-          <Link to="/remove-events" onClick={() => OpenNav()}>Remove Events</Link>
-        </li>
-        <li>
           <Link to="/activity-stream" onClick={() => OpenNav()}>Activity Stream</Link>
         </li>
         <li>

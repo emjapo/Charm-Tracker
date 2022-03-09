@@ -1,5 +1,6 @@
 import React from "react";
 import { vendorCollection } from "../api/vendors";
+import Swal from "sweetalert2";
 
 // will output the list of vendors of that type along with an input to add more and the ability to delete current vendors
 const VendorTypeList = (props) => {
@@ -40,7 +41,24 @@ const VendorTypeList = (props) => {
             <div key={vendor._id}>
               <button
                 onClick={() => {
-                  vendorCollection.remove({ _id: vendor._id });
+                  Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#B8D9C66",
+                    cancelButtonColor: "#E5E5E5",
+                    confirmButtonText: "Yes, delete it!",
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      vendorCollection.remove({ _id: vendor._id });
+                      Swal.fire(
+                        "Deleted!",
+                        "The vendor has been removed.",
+                        "success"
+                      );
+                    }
+                  });
                 }}
               >
                 X

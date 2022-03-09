@@ -5,7 +5,6 @@ import {
   PaymentManagement,
   EditVendors,
   Reports,
-  RemoveEvents,
   ActivityStream,
   Logout,
   EditEvent,
@@ -25,7 +24,6 @@ const PageRoutes = () => {
           <Route path="/payment-management" component={PaymentManagement} />
           <Route path="/edit-vendors" component={EditVendors} />
           <Route path="/reports" component={Reports} />
-          <Route path="/remove-events" component={RemoveEvents} />
           <Route path="/edit-event" component={EditEvent} />
           <Route path="/activity-stream" component={ActivityStream} />
           <Route path="/logout" component={Logout} />

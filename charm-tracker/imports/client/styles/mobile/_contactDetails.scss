@@ -1,19 +1,36 @@
+div.ContactDetails {
+    grid-column: 1/-1;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    form {
+        grid-column: 1/13;
+    }
+}
+
 fieldset {
     border: 1px solid #000000;
     display: flex;
     max-width: 80vh;
     flex-wrap: wrap;
-    padding: 3%;
+    padding: 2%;
     margin: 5%;
+    align-content: space-around;
+    justify-content: space-between;
     legend {
         font-family: $headline-font;
         font-size: x-large;
         padding: 2%;
     }
-
-}
-
-fieldset.ContactDetails {
+    label {
+        margin: 1%
+    }
+    input {
+        background: #E5E5E5;
+        border: 1px solid #C4C4C4;
+        border-radius: 10px;
+        height: 2em;
+        margin: 1%;
+    }
 
 }
 

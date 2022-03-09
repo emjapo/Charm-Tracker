@@ -24,6 +24,16 @@ h1 {
   font-size: 2em;
 }
 
+// Changing the pop-up styling
+.swal2-styled.swal2-confirm {
+  background-color: $main-color !important;
+  color: #000000 !important;
+}
+
+.swal2-styled.swal2-cancel {
+  color: #000000 !important;
+}
+
 // mobile styles
 @import 'mobile/loginMobile';
 @import 'mobile/navMobile';

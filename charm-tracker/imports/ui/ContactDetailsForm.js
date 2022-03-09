@@ -12,7 +12,7 @@ For further work:
 
 const ContactDetailsForm = (props) => {
   return (
-    <div>
+    <div className="ContactDetails">
       <form>
         <fieldset className="ContactDetails">
           <legend>Contact Details</legend>
