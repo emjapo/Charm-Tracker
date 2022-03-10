@@ -47,6 +47,7 @@ const CreateNewEvent = () => {
     let newDate = event.target.date.value;
     let newStartTime = event.target.startTime.value;
     let newStopTime = event.target.stopTime.value;
+    // pirce needs the $ stripped if it exists
     let newPrice = event.target.price.value;
 
     try {
@@ -203,7 +204,7 @@ const CreateNewEvent = () => {
             </div>
             <div>
               <label>
-                Start Time <br />
+                Stop Time <br />
                 <input type="time" id="stopTime" name="stopTime"></input>
               </label>
             </div>
