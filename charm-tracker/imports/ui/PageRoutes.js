@@ -11,7 +11,6 @@ import {
 } from "./pages"
 import NavBar from "./NavBar"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
-import { route } from "express/lib/application"
 
 const PageRoutes = () => {
   return (
