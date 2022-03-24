@@ -5,6 +5,8 @@ import { clientCollection } from "./../imports/api/clients"
 import { vendorCollection } from "../imports/api/vendors"
 import { vendorTypeCollection } from "../imports/api/vendorTypes"
 
+import config from "./config"
+
 function insertEvent({ date, startTime, endTime, price }) {
   eventsCollection.insert({
     date,
@@ -84,9 +86,12 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
+  var login = config.MY_LOGIN
+  var password = config.MY_PASSWORD
+  var port = config.PORT_NO
+
   Meteor.startup(function () {
-    process.env.MAIL_URL =
-      "smtp://postmaster@sandboxd7fdeb2dd07648928b006422e647c10d.mailgun.org:e5339fb85dcc027e938ae6f42004725f-0677517f-f029a2a2@smtp.mailgun.org:587"
+    process.env.MAIL_URL = `smtp://${login}:${password}:${port}`
 
     Account.emailTemplate.from = "no-reply@localhost3000.com"
     Account.emailTemplate.sitename = "LuckyCharms"
