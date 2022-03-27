@@ -1,6 +1,8 @@
 import React from "react";
 import { vendorTypeCollection } from "../api/vendorTypes";
 import Swal from "sweetalert2";
+import { eventCollection } from "../api/events"
+
 
 // form for adding vendor types
 // should result in a separate form rendering for the vendor type that was added
@@ -22,7 +24,21 @@ const RemoveVendorType = () => {
         let removedVendorType = event.target.removeVendorName.value;
         if (removedVendorType) {
           event.target.removeVendorName.value = "";
+          let vendorTypeName = vendorTypeCollection.find({_id: removedVendorType}).fetch()
+          vendorTypeName = vendorTypeName[0].name
           vendorTypeCollection.remove({ _id: removedVendorType });
+
+          // remove field from upcoming events
+          Meteor.call('vendors.updateEventsRemove', {
+            oldVendorType: vendorTypeName,
+          }, (err, res) => {
+            if (err) {
+              alert(err);
+            } else {
+              console.log(res)// success!
+            }
+          });
+
           console.log("Vendor Type removed");
         }
         Swal.fire("Deleted!", "The vendor has been removed.", "success");

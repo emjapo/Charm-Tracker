@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import ContactDetailsForm from "../ContactDetailsForm";
-import EventDetailsForm from "../EventDetailsForm";
 import { Link } from "react-router-dom";
 import { eventCollection } from "../../api/events";
 import Header from "../Header";
 import { clientCollection } from "../../api/clients";
+import { vendorTypeCollection } from "../../api/vendorTypes";
+
 
 /* 
 This component gets all of the details necessary for creating an event.
@@ -32,6 +32,8 @@ const CreateNewEvent = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+
+    let eventID = ""
 
     // values from contact details
     let newfname = event.target.fname.value;
@@ -71,7 +73,7 @@ const CreateNewEvent = () => {
         // Will check if there is a client in the system with the same id
         // if there is not a match, then it will add a new document to the db
         // if there is a match, then the values will be updated this will allow the user to update clients
-        clientCollection.upsert({ _id: customer.id }, { $set: {
+        let client = clientCollection.upsert({ _id: customer.id }, { $set: {
           createdAt: Date.now(),
           firstName: newfname,
           lastName: newlname,
@@ -83,17 +85,44 @@ const CreateNewEvent = () => {
           zip: newZip,
         }})
 
-        eventCollection.insert({
-          createdAt: Date.now(),
-          name: {firstName: newfname,
-                lastName: newlname},
-          email: newEmail,
-          date: newDate,
-          startTime: newStartTime,
-          stopTime: newStopTime,
-          price: newPrice,
-        });
-        console.log("Event created");
+        if (client.insertedId) {
+          eventID = eventCollection.insert({
+            createdAt: Date.now(),
+            clientID: client.insertedId,
+            name: {
+              firstName: newfname,
+              lastName: newlname
+            },
+            email: newEmail,
+            date: newDate,
+            startTime: newStartTime,
+            stopTime: newStopTime,
+            price: newPrice,
+          });
+          console.log("Event created");
+        }else {
+          eventID = eventCollection.insert({
+            createdAt: Date.now(),
+            clientID: customer.id,
+            name: {
+              firstName: newfname,
+              lastName: newlname
+            },
+            email: newEmail,
+            date: newDate,
+            startTime: newStartTime,
+            stopTime: newStopTime,
+            price: newPrice,
+          });
+          console.log("Event created");
+        }
+        
+        // adding in the vendors
+        let vendorTypes = vendorTypeCollection.find({}).fetch();
+        vendorTypes.forEach((vendorType) => {
+          eventCollection.update({_id: eventID}, {$set: {[vendorType.name]: null}})
+        })
+
       } else {
         console.log("form not completed")
       }

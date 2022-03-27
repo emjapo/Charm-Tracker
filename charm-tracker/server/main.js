@@ -1,28 +1,12 @@
 import { Meteor } from 'meteor/meteor';
+import SimpleSchema from 'simpl-schema';
 
 import { eventCollection } from './../imports/api/events';
 import { clientCollection } from './../imports/api/clients';
 import { vendorCollection} from '../imports/api/vendors';
 import { vendorTypeCollection } from '../imports/api/vendorTypes';
 
-function insertEvent({ date, startTime, endTime, price }) {
-  eventsCollection.insert({date, startTime, endTime, price, createdAt: new Date()});
-}
 
-function insertClient({ firstName, lastName, email, phoneNum, street, city, state, zip }) {
-  clientCollection.insert({firstName, lastName, email, phoneNumber, street, city, state, zip, createdAt: new Date()});
-}
-
-//vendorType: ID of the vendorType for th evendor in the venderType collection
-//vendorName: name of the vendor
-function insertVendors({ vendorType, vendorName }) {
-  vendorCollection.insert({ vendorType, vendorName, createdAt: new Date()});
-}
-
-//vendorType: string containing the type of vendor 
-function insertVendors({vendorType}) {
-  vendorTypeCollection.insert({ vendorType, createdAt: new Date()});
-}
 
 Meteor.startup(() => {
     //Synchronize 'events' collection with every subscriber
@@ -44,4 +28,40 @@ Meteor.startup(() => {
     Meteor.publish("vendorTypes/all", function() {
       return vendorTypeCollection.find();
     });
+
+  Meteor.methods({
+    'vendors.updateEventsAdd'({ newVendorType }) {
+      new SimpleSchema({
+        newVendorType: { type: String },
+      }).validate({ newVendorType });
+
+      // get the current date and format it to html dtate input format
+      var q = new Date();
+      var month = q.getMonth()+1
+      if (month < 10) {
+        month = "0" + month
+      }
+      var date = q.getFullYear()+ "-" + month + "-" + q.getDate();
+      console.log(date)
+      eventCollection.update({ date: { $gt: date } }, { $set: { [newVendorType]: null } }, { multi: true })
+    }
+  });
+
+  Meteor.methods({
+    'vendors.updateEventsRemove'({ oldVendorType }) {
+      new SimpleSchema({
+        oldVendorType: { type: String },
+      }).validate({ oldVendorType });
+
+      // get the current date and format it to html dtate input format
+      var q = new Date();
+      var month = q.getMonth() + 1
+      if (month < 10) {
+        month = "0" + month
+      }
+      var date = q.getFullYear() + "-" + month + "-" + q.getDate();
+      console.log(date)
+      eventCollection.update({ date: { $gt: date } }, { $unset: {[oldVendorType]: ""}} , { multi: true } )
+    }
+  });
 });
