@@ -1,0 +1,103 @@
+ nav{
+      display: flex;
+      ul{
+        display: flex;
+        list-style: none;
+        justify-content: space-evenly;
+        align-items: center;
+        a {
+          text-decoration: none;
+          color: #000000;
+          font-size: 1em;
+          white-space: nowrap;
+        }
+      }
+    }
+  
+  
+  .line {
+    width: 50px;
+    height: 5px;
+    background: #000000;
+    margin: 5px;
+    border-radius: 5px;
+  }
+
+  nav {
+    position: relative;
+  }
+
+  .hamburger {
+    position: absolute;
+    cursor: pointer;
+    right: 5%;
+    top: 50%;
+    // transform: translate(-5%, -50%);
+    z-index:2;
+    margin: 3%;
+  }
+
+  nav {
+    ul {
+      position: fixed;
+      background: $main-color;
+      height: 100vh;
+      width:100%;
+      flex-direction: column;
+      clip-path: circle(100px at 110% -20%);
+      transition: all 1s ease-out;
+      pointer-events: none;
+      z-index: 1;
+      li{
+        opacity:0;
+        a {
+          font-size: 1.5em;
+        }
+      }
+    }
+  }
+
+  a:hover {
+      color: $text-color-emphasis;
+  }
+  nav > ul.open {
+    clip-path: circle(1500px at 110% -20%);
+    pointer-events: all;
+    z-index: 1;
+  }
+
+  nav > ul > li:nth-child(1) {
+    transition: all 0.5s ease 0.1s
+  }
+  nav > ul > li:nth-child(2) {
+    transition: all 0.5s ease 0.2s
+  }
+  nav > ul > li:nth-child(3) {
+    transition: all 0.5s ease 0.3s
+  }
+  nav > ul > li:nth-child(4) {
+    transition: all 0.5s ease 0.4s
+  }
+  nav > ul > li:nth-child(5) {
+    transition: all 0.5s ease 0.5s
+  }
+  nav > ul > li:nth-child(6) {
+    transition: all 0.5s ease 0.6s
+  }nav > ul > li:nth-child(7) {
+    transition: all 0.5s ease 0.7s
+  }
+  nav > ul > li:nth-child(8) {
+    transition: all 0.5s ease 0.8s
+  }
+
+  li.fade {
+    opacity:1;
+  }
+
+  footer > ul > li {
+    transition: all 1s ease;
+  }
+
+  .disappear {
+    display:none;
+  }

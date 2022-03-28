@@ -1,0 +1,45 @@
+@import 'reset';
+
+// Variable Declarations
+
+// colors
+$main-color: #B8D9C6;
+$text-color-green: #82998C;
+$text-color-emphasis: #F28B66;
+$form-background-color: #C4C4C4;
+
+// text styles
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Pacifico&family=Playfair+Display&display=swap');
+$body-copy: 'Open Sans', sans-serif;
+$display-font: 'Pacifico', cursive;
+$headline-font: 'Playfair Display', serif;
+
+body {
+  font-family: $body-copy;
+  font-size: 1em;
+}
+
+h1 {
+  font-family: $display-font;
+  font-size: 2em;
+}
+
+// Changing the pop-up styling
+.swal2-styled.swal2-confirm {
+  background-color: $main-color !important;
+  color: #000000 !important;
+}
+
+.swal2-styled.swal2-cancel {
+  color: #000000 !important;
+}
+
+// mobile styles
+@import 'mobile/loginMobile';
+@import 'mobile/navMobile';
+@import 'mobile/contactDetails';
+
+// web styles
+@import 'components/login';
+@import 'components/nav';
+@import 'components/calendar'
