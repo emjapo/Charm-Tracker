@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-allow-deny@1.1.0
-autopublish@1.0.7
-autoupdate@1.8.0
-babel-compiler@7.8.0
-=======
 allow-deny@1.1.1
 autopublish@1.0.7
 autoupdate@1.8.0
 babel-compiler@7.8.1
->>>>>>> development
 babel-runtime@1.5.0
 base64@1.0.12
 binary-heap@1.0.11
@@ -31,16 +24,10 @@ ecmascript-runtime-server@0.11.0
 ejson@1.1.1
 es5-shim@4.8.0
 fetch@0.1.1
-<<<<<<< HEAD
-geojson-utils@1.0.10
-hot-code-push@1.0.4
-hot-module-replacement@0.5.0
-=======
 fourseven:scss@4.15.0
 geojson-utils@1.0.10
 hot-code-push@1.0.4
 hot-module-replacement@0.5.1
->>>>>>> development
 html-tools@1.1.2
 htmljs@1.1.1
 id-map@1.1.1
@@ -52,30 +39,18 @@ meteor@1.10.0
 meteor-base@1.5.1
 minifier-css@1.6.0
 minifier-js@2.7.3
-<<<<<<< HEAD
-minimongo@1.7.0
-=======
 minimongo@1.8.0
->>>>>>> development
 mobile-experience@1.1.0
 mobile-status-bar@1.1.0
 modern-browsers@0.1.7
 modules@0.18.0
 modules-runtime@0.12.0
 modules-runtime-hot@0.14.0
-<<<<<<< HEAD
-mongo@1.13.0
-mongo-decimal@0.1.2
-mongo-dev-server@1.1.0
-mongo-id@1.0.8
-npm-mongo@3.9.1
-=======
 mongo@1.14.6
 mongo-decimal@0.1.2
 mongo-dev-server@1.1.0
 mongo-id@1.0.8
 npm-mongo@4.3.1
->>>>>>> development
 ordered-dict@1.1.0
 promise@0.12.0
 random@1.2.0
@@ -95,9 +70,5 @@ templating-tools@1.2.1
 tracker@1.2.0
 typescript@4.4.1
 underscore@1.0.10
-<<<<<<< HEAD
-webapp@1.13.0
-=======
 webapp@1.13.1
->>>>>>> development
 webapp-hashing@1.1.0
