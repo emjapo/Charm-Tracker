@@ -30,9 +30,6 @@ const NavBar = () => {
         <li>
           <Link to="/reports" onClick={() => OpenNav()}>Reports</Link>
         </li>
-        <li>
-          <Link to="/activity-stream" onClick={() => OpenNav()}>Activity Stream</Link>
-        </li>
         <li onClick={() => OpenNav()}>
           <SignOut />
         </li>

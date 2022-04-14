@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export const CalendarHeader = ({ onNext, onBack, dateDisplay }) => {
 
@@ -11,7 +12,7 @@ export const CalendarHeader = ({ onNext, onBack, dateDisplay }) => {
 
     <img src="/images/logo.svg"
        class="logo"></img>
-        <button id= "createNewEvent"> Create New Event</button>
+        <Link className="linkasbutton" to="/create-new-event">Create New Event</Link>
       </div>
       <div id="toggleDays">
       <div id="monthDisplay">{dateDisplay}</div>       
