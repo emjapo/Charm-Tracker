@@ -2,6 +2,7 @@ import React from "react"
 import Header from "../Header"
 import { eventCollection } from "../../api/events";
 import { clientCollection } from "../../api/clients";
+import NavBar from "../NavBar";
 
 /*
 Only accessable from the calendar page when an event is selected. The client details will be 
@@ -100,6 +101,7 @@ const EditEvent = (props) => {
 
     return (
         <div>
+            <NavBar />
             <Header title="Edit Event" />
 
                 

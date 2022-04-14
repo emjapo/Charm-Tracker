@@ -1,19 +1,15 @@
-import React, { useState } from "react"
-// import { UP_Collection_Access } from './../api/user_posts.js';
-import Login from "./pages/Login.js"
-import ResetPassword from "./pages/ResetPassword.js"
-import PageRoutes from "./PageRoutes.js"
+import React from "react"
+import PageRoutes from "./PageRoutes"
+import '../api/Firebase'
+import { AuthProvider } from "./AuthManagement.js"
+
 
 const App = () => {
-  const [loggedIn, setLoggedIn] = useState()
-
-  if (!loggedIn) {
-    return <Login setLoggedIn={setLoggedIn} />
-  }
   return (
     <>
-      <PageRoutes />
-      {/* <Title title={this.props.passedPropTitle} /> */}
+      <AuthProvider>
+        <PageRoutes />
+      </AuthProvider>
     </>
   )
 }

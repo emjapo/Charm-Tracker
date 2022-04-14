@@ -20,6 +20,14 @@
             grid-column: 4/10;
             display: grid;
             grid-template-columns: repeat(6, 1fr);
+            
+
+            #error {
+                color: red;
+                grid-column: 3/5;
+                margin: 3% 1%;
+                font-style: italic;
+            }
 
             label {
                 grid-column: 3/5;
@@ -35,7 +43,7 @@
                 border: 1px solid #C4C4C4;
                 border-radius: 15px;
             }
-            #login, #reset {
+            #login, #register, #reset {
                 border-radius: 15px;
                 padding: 15px;
                 margin-top: 2%;
@@ -45,6 +53,7 @@
                 width: 70%;
                 font: 1.15em $body-copy;
                 justify-self: center;
+                min-width: fit-content;
             }
         }
     }

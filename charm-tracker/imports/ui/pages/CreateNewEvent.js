@@ -1,10 +1,22 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { eventCollection } from "../../api/events";
-import Header from "../Header";
-import { clientCollection } from "../../api/clients";
-import { vendorTypeCollection } from "../../api/vendorTypes";
+import React, { useState } from "react"
+import { Link } from "react-router-dom"
+import { eventCollection } from "../../api/events"
+import Header from "../Header"
+import { clientCollection } from "../../api/clients"
+import { vendorTypeCollection } from "../../api/vendorTypes"
+import {
+  validatePrice,
+  validateZip,
+  validatePhone,
+  validateEmail,
+  validateYear,
+  validateTimeSpan,
+  validateState,
+} from "./validation/eventValidation"
+import NavBar from "../NavBar";
 
+import { ToastContainer, toast } from "react-toastify"
+import GenerateTasksFromEvent from "../../api/taskHandling/TaskHandler.js"
 
 /* 
 This component gets all of the details necessary for creating an event.
@@ -15,75 +27,117 @@ Event details along with the name stored as {firstname, lastName} and email are 
 */
 
 const CreateNewEvent = () => {
-  const [customer, setCustomer] = useState({});
+  const [customer, setCustomer] = useState({})
+  const [message, setMessage] = useState("Event Created!")
+  const [success, setSuccess] = useState(false)
+
   // const [previousCustomer, setPreviousCustomer] = useState();
   // this will need some refactoring to pull the previous customers from the database and add them to selections
 
-  const getData = (event) => {
+  const tellEmWutsUp = () => {
+    toast.warn(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
+  }
+
+  const getData = event => {
     if (event.target.value != "") {
       let client = clientCollection.find({ _id: event.target.value }).fetch()
       console.log(client)
-      setCustomer({id: client[0]._id,  firstName: client[0].firstName, lastName: client[0].lastName, email: client[0].email, phoneNum: client[0].phoneNumber, address: client[0].address, city: client[0].city, state: client[0].state, zip: client[0].zip })
+      setCustomer({
+        id: client[0]._id,
+        firstName: client[0].firstName,
+        lastName: client[0].lastName,
+        email: client[0].email,
+        phoneNum: client[0].phoneNumber,
+        address: client[0].address,
+        city: client[0].city,
+        state: client[0].state,
+        zip: client[0].zip,
+      })
     } else {
       setCustomer("")
     }
   }
 
-
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault()
 
     let eventID = ""
+    let data = event.target
 
     // values from contact details
-    let newfname = event.target.fname.value;
-    let newlname = event.target.lname.value;
-    let newEmail = event.target.email.value;
-    let newPhoneNum = event.target.PhoneNum.value;
-    let newAddress = event.target.address.value;
-    let newCity = event.target.city.value;
-    let newState = event.target.state.value;
-    let newZip = event.target.zip.value;
+    let newfname = data.fname.value
+    let newlname = data.lname.value
+    let newEmail = validateEmail(data)
+    let newPhoneNum = validatePhone(data)
+    let newAddress = data.address.value
+    let newCity = data.city.value
+    let newState = validateState(data)
+    let newZip = validateZip(data)
 
     //values from event details
-    let newDate = event.target.date.value;
-    let newStartTime = event.target.startTime.value;
-    let newStopTime = event.target.stopTime.value;
-    // pirce needs the $ stripped if it exists
-    let newPrice = event.target.price.value;
+    let newDate = validateYear(data)
+    let newStartTime = data.startTime.value
+    let newStopTime = validateTimeSpan(data, newStartTime)
+    let newPrice = validatePrice(data)
 
     try {
-      if (newfname && newlname && newEmail && newPhoneNum && newAddress && newCity && newState && newZip && newDate && newStartTime && newStopTime && newPrice) {
+      if (
+        newfname &&
+        newlname &&
+        newEmail &&
+        newPhoneNum &&
+        newAddress &&
+        newCity &&
+        newState &&
+        newZip &&
+        newDate &&
+        newStartTime &&
+        newStopTime &&
+        newPrice
+      ) {
         // values from contact details
-        event.target.fname.value = "";
-        event.target.lname.value = "";
-        event.target.email.value = "";
-        event.target.PhoneNum.value = "";
-        event.target.address.value = "";
-        event.target.city.value = "";
-        event.target.state.value = "";
-        event.target.zip.value = "";
+        data.fname.value = ""
+        data.lname.value = ""
+        data.email.value = ""
+        data.PhoneNum.value = ""
+        data.address.value = ""
+        data.city.value = ""
+        data.state.value = ""
+        data.zip.value = ""
 
         //values from event details
-        event.target.date.value = "";
-        event.target.startTime.value = "";
-        event.target.stopTime.value = "";
-        event.target.price.value = "";
+        data.date.value = ""
+        data.startTime.value = ""
+        data.stopTime.value = ""
+        data.price.value = ""
 
         // Will check if there is a client in the system with the same id
         // if there is not a match, then it will add a new document to the db
         // if there is a match, then the values will be updated this will allow the user to update clients
-        let client = clientCollection.upsert({ _id: customer.id }, { $set: {
-          createdAt: Date.now(),
-          firstName: newfname,
-          lastName: newlname,
-          email: newEmail,
-          phoneNumber: newPhoneNum,
-          address: newAddress,
-          city: newCity,
-          state: newState,
-          zip: newZip,
-        }})
+        let client = clientCollection.upsert(
+          { _id: customer.id },
+          {
+            $set: {
+              createdAt: Date.now(),
+              firstName: newfname,
+              lastName: newlname,
+              email: newEmail,
+              phoneNumber: newPhoneNum,
+              address: newAddress,
+              city: newCity,
+              state: newState,
+              zip: newZip,
+            },
+          }
+        )
 
         if (client.insertedId) {
           eventID = eventCollection.insert({
@@ -91,52 +145,78 @@ const CreateNewEvent = () => {
             clientID: client.insertedId,
             name: {
               firstName: newfname,
-              lastName: newlname
+              lastName: newlname,
             },
             email: newEmail,
             date: newDate,
             startTime: newStartTime,
             stopTime: newStopTime,
             price: newPrice,
-          });
-          console.log("Event created");
-        }else {
+          })
+          console.log("Event created")
+        } else {
           eventID = eventCollection.insert({
             createdAt: Date.now(),
             clientID: customer.id,
             name: {
               firstName: newfname,
-              lastName: newlname
+              lastName: newlname,
             },
             email: newEmail,
             date: newDate,
             startTime: newStartTime,
             stopTime: newStopTime,
             price: newPrice,
-          });
-          console.log("Event created");
+          })
+          console.log("Event created")
         }
-        
-        // adding in the vendors
-        let vendorTypes = vendorTypeCollection.find({}).fetch();
-        vendorTypes.forEach((vendorType) => {
-          eventCollection.update({_id: eventID}, {$set: {[vendorType.name]: null}})
-        })
 
+        //TODO: call the tasks fucntion here????
+        console.log(eventID)
+        GenerateTasksFromEvent(eventID)
+
+        // adding in the vendors
+        let vendorTypes = vendorTypeCollection.find({}).fetch()
+        vendorTypes.forEach(vendorType => {
+          eventCollection.update(
+            { _id: eventID },
+            { $set: { [vendorType.name]: null } }
+          )
+        })
+        setSuccess(true)
       } else {
+        setSuccess(false)
         console.log("form not completed")
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
+    }
+  }
+
+  const handleCreate = () => {
+    if (success) {
+      return tellEmWutsUp()
     }
   }
 
   // get clients from db
-  let clients = clientCollection.find({}).fetch();
+  let clients = clientCollection.find({}).fetch()
 
   return (
     <div>
+      <NavBar />
       <Header title="Create New Event" />
+      <ToastContainer
+        position="top-right"
+        autoClose={15000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
 
       {/* section to select previous customers to autofill the contact details */}
       <div>
@@ -147,14 +227,14 @@ const CreateNewEvent = () => {
           onChange={getData}
           defaultValue=""
         >
-          <option value="" ></option>
-            {clients.map((client) => {
-              return (
-                <option key={client._id} value={client._id}>
-                  {client.firstName} {client.lastName}
-                </option>
-              );
-            })}
+          <option value=""></option>
+          {clients.map(client => {
+            return (
+              <option key={client._id} value={client._id}>
+                {client.firstName} {client.lastName}
+              </option>
+            )
+          })}
         </select>
       </div>
 
@@ -176,43 +256,78 @@ const CreateNewEvent = () => {
             <div>
               <label>
                 Last Name <br />
-                <input type="input" id="lname" name="lname" defaultValue={customer.lastName}></input>
+                <input
+                  type="input"
+                  id="lname"
+                  name="lname"
+                  defaultValue={customer.lastName}
+                ></input>
               </label>
             </div>
             <div>
               <label>
                 Email <br />
-                <input type="email" id="email" name="email" defaultValue={customer.email}></input>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  defaultValue={customer.email}
+                ></input>
               </label>
             </div>
             <div>
               <label>
                 Phone Number <br />
-                <input type="input" id="PhoneNum" name="PhoneNum" defaultValue={customer.phoneNum}></input>
+                <input
+                  type="input"
+                  id="PhoneNum"
+                  name="PhoneNum"
+                  defaultValue={customer.phoneNum}
+                ></input>
               </label>
             </div>
             <div>
               <label>
                 Address <br />
-                <input type="input" id="address" name="address" defaultValue={customer.address}></input>
+                <input
+                  type="input"
+                  id="address"
+                  name="address"
+                  defaultValue={customer.address}
+                ></input>
               </label>
             </div>
             <div>
               <label>
                 City <br />
-                <input type="input" id="city" name="city" defaultValue={customer.city}></input>
+                <input
+                  type="input"
+                  id="city"
+                  name="city"
+                  defaultValue={customer.city}
+                ></input>
               </label>
             </div>
             <div>
               <label>
                 State <br />
-                <input type="input" id="state" name="state" defaultValue={customer.state}></input>
+                <input
+                  type="input"
+                  id="state"
+                  name="state"
+                  defaultValue={customer.state}
+                ></input>
               </label>
             </div>
             <div>
               <label>
                 Zip <br />
-                <input type="input" id="zip" name="zip" defaultValue={customer.zip}></input>
+                <input
+                  type="input"
+                  id="zip"
+                  name="zip"
+                  defaultValue={customer.zip}
+                ></input>
               </label>
             </div>
           </fieldset>
@@ -245,16 +360,15 @@ const CreateNewEvent = () => {
             </div>
           </fieldset>
           <div>
-            <Link to="/calendar" className="button">Cancel</Link>
-            <button>
-              Add Event
-            </button>
+            <Link to="/calendar" className="button">
+              Cancel
+            </Link>
+            <button onClick={handleCreate()}>Add Event</button>
           </div>
         </form>
-
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CreateNewEvent;
+export default CreateNewEvent

@@ -4,6 +4,7 @@ import VendorTypeList from "../VendorTypeList"
 import { vendorTypeCollection } from "../../api/vendorTypes"
 import AddVendorType from "../AddVendorTypes"
 import RemoveVendorType from "../RemoveVendorTypes"
+import NavBar from "../NavBar"
 
 const EditVendors = () => {
 
@@ -12,6 +13,7 @@ const EditVendors = () => {
 
   return (
     <div>
+      <NavBar />
       <Header title="Edit Vendors" />
 
       {/* Form for adding vendor types */}
