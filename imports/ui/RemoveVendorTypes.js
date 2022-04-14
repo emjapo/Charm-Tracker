@@ -50,7 +50,7 @@ const RemoveVendorType = () => {
   let vendors = vendorTypeCollection.find({}).fetch();
 
   return (
-    <div>
+    <div class="removeVendor">
       <form onSubmit={handleSubmit}>
         <fieldset>
           <legend>Remove Vendor Type</legend>

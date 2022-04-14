@@ -6,6 +6,7 @@ Component that holds the form to collect event details. This same comonent can b
 const EventDetailsForm = () => {
   return (
     <div>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       <form>
         <fieldset className="EventDetails">
           <legend>Event Details</legend>

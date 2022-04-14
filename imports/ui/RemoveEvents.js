@@ -16,7 +16,7 @@ const RemoveEvents = (props) => {
     let userPassword = "Danita"; // FIXME:  this will need to check that the password is the same as the looged in user
     //popup to confirm password
     const { value: password } = Swal.fire({
-      title: "Enter password to confirm removal",
+      title: "Enter pin to confirm removal",
       input: "text",
       showCancelButton: true,
       inputValidator: (value) => {
@@ -42,7 +42,7 @@ const RemoveEvents = (props) => {
 
 
   return (
-    <div>
+    <div className="removeEventsButton">
         <form onSubmit={handleSubmit}>
             <button>Remove event</button>
         </form>

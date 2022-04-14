@@ -2,6 +2,10 @@
     nav > ul.open {
     clip-path: circle(2000px at 110% -20%);
     pointer-events: all;
-    z-index: 1;
+    z-index: 2;
+  }
+
+  .hamburger {
+    padding-top: 0%;
   }
 }

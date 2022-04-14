@@ -1,22 +1,31 @@
-@import 'reset';
+@import "reset";
 
 // Variable Declarations
 
 // colors
-$main-color: #B8D9C6;
-$text-color-green: #82998C;
-$text-color-emphasis: #F28B66;
-$form-background-color: #C4C4C4;
+$main-color: #b8d9c6;
+$text-color-green: #82998c;
+$text-color-emphasis: #f28b66;
+$form-background-color: #c4c4c4;
 
 // text styles
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Pacifico&family=Playfair+Display&display=swap');
-$body-copy: 'Open Sans', sans-serif;
-$display-font: 'Pacifico', cursive;
-$headline-font: 'Playfair Display', serif;
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Pacifico&family=Playfair+Display&display=swap");
+$body-copy: "Open Sans", sans-serif;
+$display-font: "Pacifico", cursive;
+$headline-font: "Playfair Display", serif;
 
 body {
   font-family: $body-copy;
   font-size: 1em;
+}
+
+@media only screen and (min-width: 800px) {
+  body {
+    font-family: $body-copy;
+    font-size: 1em;
+    background: no-repeat right bottom/45%
+      url("images/southerncharmslogobkgd.png");
+  }
 }
 
 h1 {
@@ -35,11 +44,19 @@ h1 {
 }
 
 // mobile styles
-@import 'mobile/loginMobile';
-@import 'mobile/navMobile';
-@import 'mobile/contactDetails';
+@import "mobile/loginMobile";
+@import "mobile/navMobile";
+@import "mobile/contactDetails";
+@import "mobile/taskBarMobile";
+@import "mobile/modal";
 
 // web styles
-@import 'components/login';
-@import 'components/nav';
-@import 'components/calendar'
+@import "components/login";
+@import "components/nav";
+@import "components/calendar";
+@import "components/payment";
+@import "components/vendor";
+@import "components/editevent";
+@import "components/reports";
+@import "components/taskBar";
+@import "components/header";

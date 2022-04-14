@@ -1,0 +1,42 @@
+.HeaderDiv {
+    padding: 3%;
+    .header {
+        display: flex;
+        align-items: center;
+        img {
+            width: 40px;
+        }
+        h1 {
+            margin-left: 1%;
+            font-size: 1.3em;
+        }
+    }
+    h2 {
+        font-size: 2em;
+        font-family: $display-font;
+        margin-left: 9%;
+        margin-top: 1%;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+.HeaderDiv {
+    padding: 3%;
+    .header {
+        display: flex;
+        align-items: center;
+        img {
+            width: 75px;
+        }
+        h1 {
+            margin-left: 1%;
+        }
+    }
+    h2 {
+        font-size: 3em;
+        font-family: $display-font;
+        margin-left: 9%;
+        margin-top: 1%;
+    }
+}
+}

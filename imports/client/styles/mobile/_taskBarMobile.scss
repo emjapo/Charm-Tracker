@@ -1,0 +1,191 @@
+/* The sidebar menu */
+.sidebar {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0;
+  left: 0;
+  background-color: #fff; /* white*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+
+  #customer {
+    width: auto;
+  }
+ 
+}
+
+/* The sidebar links */
+.sidebar ul li {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar .todaystask {
+  max-height: 45vh;
+  overflow-y: scroll;
+  padding-top: 50px;
+}
+
+
+/* Position and style the close button (top right corner) */
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  left: 25px;
+  font-size: 4em;
+  margin-right: 50px;
+  text-decoration: none;
+  color: $text-color-emphasis;
+}
+
+/* The button used to open the sidebar */
+.openbtn {
+  cursor: pointer;
+  width: 3em;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#container {
+  transition: margin-left .5s; /* If you want a transition effect */
+  padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar ul li {font-size: 18px;}
+}
+
+/* Customize the label (the container) */
+.check {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.check input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background: #E5E5E5;
+  border: 1px solid #C4C4C4;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+/* On mouse-over, add a grey background color */
+.check:hover input ~ .checkbox {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.check input:checked ~ .checkbox {
+  background-color: $main-color;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkbox:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.check input:checked ~ .checkbox:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.check .checkbox:after {
+  left: 8px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+p.task {
+  color: black;
+  margin-left: 10%;
+}
+
+p.completed {
+  text-decoration: line-through;
+  color: #999999;
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2em;
+  p{
+    font-size: 1.3em;
+  }
+}
+
+h3 {
+  font-family: 'Pacifico';
+  font-size: 2em;
+  padding: 8px 8px 8px 32px;
+}
+
+#eventTasks p {
+  font-size: 1.3em;
+}
+
+.linkasbutton {
+  font-size: 1.3em;
+  margin-top: 5%;
+  margin-bottom: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    cursor: pointer;
+    display: block;
+    border: none;
+    outline: none;
+    padding: 3%;
+    border-radius: 5px;
+    color: white;
+    background-color: $main-color;
+    text-decoration: none;
+}
+
+.removeEventsButton {
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}

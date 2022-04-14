@@ -21,6 +21,18 @@ div.login {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
 
+        #error {
+            color: red;
+            grid-column: 1/7;
+            margin: 3% 1%;
+            .success{
+                color: $text-color-emphasis;
+                font-style: normal;
+                text-align: center;
+                font-size: 1.5em;
+            }
+        }
+
         label {
            grid-column: 1/7;
             margin: 3% 1%;
@@ -35,7 +47,7 @@ div.login {
             border: 1px solid #C4C4C4;
             border-radius: 15px;
         }
-        #login, #reset {
+        #login, #register, #reset {
             border-radius: 15px;
             padding: 15px;
             margin-top: 2%;

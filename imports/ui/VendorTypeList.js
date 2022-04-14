@@ -31,7 +31,7 @@ const VendorTypeList = (props) => {
 
   // return the component
   return (
-    <div>
+    <div class="certainVendors">
       <fieldset className="vendor">
         <legend>{vendorTypeName}</legend>
 

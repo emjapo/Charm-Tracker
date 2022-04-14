@@ -2,23 +2,29 @@ import React from "react"
 import Header from "../Header"
 import { eventCollection } from "../../api/events";
 import { clientCollection } from "../../api/clients";
-
+import NavBar from "../NavBar";
+import { Link, Redirect, useParams } from "react-router-dom";
 /*
-Only accessable from the calendar page when an event is selected. The client details will be 
-accessed by whatever email is stored in the event doc.
+Only accessable from the calendar page when an event is selected. The client details can be accessed with the clientID in the event doc.
 */
 
 
-const EditEvent = (props) => {
-    const { eventID } = props
+const EditEvent = () => {
+    let { eventID } = useParams();
 
     let eventInfo = eventCollection.find({_id: eventID}).fetch()
 
     eventInfo = eventInfo[0]
+    let clientInfo = ""
 
-    let clientInfo = clientCollection.find({email: eventInfo.email}).fetch()
-
-    clientInfo = clientInfo[0]
+    if (eventInfo != undefined) {
+        clientInfo = clientCollection.find({ _id: eventInfo.clientID }).fetch()
+        clientInfo = clientInfo[0]
+    } else {
+        alert("Internal error: unable to update this event");
+        <Redirect to='/calendar' /> 
+    }
+    
 
 
     const handleSubmit = (event) => {
@@ -100,6 +106,9 @@ const EditEvent = (props) => {
 
     return (
         <div>
+            
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+            <NavBar />
             <Header title="Edit Event" />
 
                 

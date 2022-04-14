@@ -1,15 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import SignOut from "./SignOut";
 
 const NavBar = () => {
+
+
   return (
     <nav>
-      <div className="hamburger"
+      <div id="hamburger" className="hamburger"
         onClick={() => OpenNav()}>
         <div className="line"></div>
         <div className="line"></div>
         <div className="line"></div>
       </div>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       <ul>
         <li>
           <Link to="/calendar" onClick={() => OpenNav()}>Calendar</Link>
@@ -29,8 +33,8 @@ const NavBar = () => {
         <li>
           <Link to="/activity-stream" onClick={() => OpenNav()}>Activity Stream</Link>
         </li>
-        <li>
-          <Link to="/logout" onClick={() => OpenNav()}>Logout</Link>
+        <li onClick={() => OpenNav()}>
+          <SignOut />
         </li>
       </ul>
     </nav>
@@ -39,7 +43,6 @@ const NavBar = () => {
 
 
 function OpenNav() {
-  // const hamburger = document.querySelector(".hamburger");
   const navLinks = document.querySelector("nav > ul");
   const links = document.querySelectorAll("nav > ul > li");
 
